@@ -1,0 +1,228 @@
+============================================================
+STEP 1 — BARE REACT / TSX
+============================================================
+
+export default function App() {
+  return (
+    <main>
+      <article>
+        <img
+          src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80"
+          alt="Red sneaker"
+        />
+
+        <div>
+          <p>SNEAKERS</p>
+
+          <h2>Air Runner Pro</h2>
+
+          <p>
+            Lightweight everyday sneakers with breathable mesh
+            and responsive cushioning.
+          </p>
+
+          <div>
+            <span>$129</span>
+            <button>Add to cart</button>
+          </div>
+        </div>
+      </article>
+    </main>
+  );
+}
+
+
+
+============================================================
+STEP 2 — TURN IT INTO A CARD
+============================================================
+
+export default function App() {
+  return (
+    <main className="min-h-screen grid place-items-center bg-slate-100 p-6 text-slate-900">
+      <article className="w-full max-w-sm overflow-hidden rounded-2xl bg-white shadow-lg">
+        <img
+          className="h-56 w-full object-cover"
+          src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80"
+          alt="Red sneaker"
+        />
+
+        <div className="p-6">
+          <p>SNEAKERS</p>
+
+          <h2>Air Runner Pro</h2>
+
+          <p>
+            Lightweight everyday sneakers with breathable mesh
+            and responsive cushioning.
+          </p>
+
+          <div>
+            <span>$129</span>
+            <button>Add to cart</button>
+          </div>
+        </div>
+      </article>
+    </main>
+  );
+}
+
+
+
+============================================================
+STEP 3 — POLISHED + INTERACTIVE + RESPONSIVE
+============================================================
+
+export default function App() {
+  return (
+    <main className="min-h-screen grid place-items-center bg-slate-100 p-6 text-slate-900">
+      <article className="w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-lg md:flex">
+        <img
+          className="h-56 w-full object-cover md:h-auto md:w-2/5"
+          src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80"
+          alt="Red sneaker"
+        />
+
+        <div className="p-6">
+          <p className="text-xs font-semibold tracking-widest text-indigo-600">
+            SNEAKERS
+          </p>
+
+          <h2 className="mt-2 text-2xl font-bold">
+            Air Runner Pro
+          </h2>
+
+          <p className="mt-3 text-sm leading-6 text-slate-600">
+            Lightweight everyday sneakers with breathable mesh
+            and responsive cushioning.
+          </p>
+
+          <div className="mt-6 flex items-center justify-between">
+            <span className="text-xl font-bold">
+              $129
+            </span>
+
+            <button
+              className="
+                rounded-xl
+                bg-indigo-600
+                px-4
+                py-2
+                text-sm
+                font-semibold
+                text-white
+                transition
+                hover:bg-indigo-700
+                active:scale-95
+                focus:outline-none
+                focus:ring-2
+                focus:ring-indigo-500
+                focus:ring-offset-2
+              "
+            >
+              Add to cart
+            </button>
+          </div>
+        </div>
+      </article>
+    </main>
+  );
+}
+
+
+
+============================================================
+STEP 4 — MAKE IT A REUSABLE REACT COMPONENT
+============================================================
+
+type ProductCardProps = {
+  image: string;
+  category: string;
+  name: string;
+  description: string;
+  price: number;
+  onAddToCart: () => void;
+};
+
+function ProductCard({
+  image,
+  category,
+  name,
+  description,
+  price,
+  onAddToCart,
+}: ProductCardProps) {
+  return (
+    <article className="w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-lg md:flex">
+      <img
+        className="h-56 w-full object-cover md:h-auto md:w-2/5"
+        src={image}
+        alt={name}
+      />
+
+      <div className="p-6">
+        <p className="text-xs font-semibold tracking-widest text-indigo-600">
+          {category}
+        </p>
+
+        <h2 className="mt-2 text-2xl font-bold">
+          {name}
+        </h2>
+
+        <p className="mt-3 text-sm leading-6 text-slate-600">
+          {description}
+        </p>
+
+        <div className="mt-6 flex items-center justify-between">
+          <span className="text-xl font-bold">
+            ${price}
+          </span>
+
+          <button
+            onClick={onAddToCart}
+            className="
+              rounded-xl
+              bg-indigo-600
+              px-4
+              py-2
+              text-sm
+              font-semibold
+              text-white
+              transition
+              hover:bg-indigo-700
+              active:scale-95
+              focus:outline-none
+              focus:ring-2
+              focus:ring-indigo-500
+              focus:ring-offset-2
+            "
+          >
+            Add to cart
+          </button>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+export default ProductCard;
+
+------------- make folder named components, button.tsx --------------
+
+import ProductCard from './components/button';
+
+function App() {
+  return (
+    <main className="min-h-screen grid place-items-center bg-slate-100 p-6 text-slate-900">
+      <ProductCard
+        image="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80"
+        category="SNEAKERS"
+        name="Air Runner Pro"
+        description="Lightweight everyday sneakers with breathable mesh and responsive cushioning."
+        price={129}
+        onAddToCart={() => alert("Added to cart!")}
+      />
+    </main>
+  );
+}
+export default App;
