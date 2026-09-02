@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Same Card, Three Ways — Tailwind vs Bootstrap vs Vanilla CSS</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <nav class="topnav">
+    <span class="brand">/* three ways to style a button */</span>
+    <div class="topnav-links">
+      <a href="#previews">Live cards</a>
+      <a href="#tradeoffs">Trade-offs</a>
+      <a href="#table">Comparison</a>
+      <a href="#verdict">Verdict</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <h1>Same card.<br>Three CSS philosophies.</h1>
+    <p class="hero-sub">
+      One pricing card — <strong>“Pricing plan, everything you need for a weekend project, Save.”</strong>
+      Built three times: with Tailwind's utility classes, with Bootstrap's ready-made components,
+      and with plain CSS you write yourself.
+    </p>
+    <div class="stat-row">
+      <div class="stat stat-tw">
+        <span class="stat-num">12</span>
+        <span class="stat-label">utility classes, right on the tag</span>
+      </div>
+      <div class="stat stat-bs">
+        <span class="stat-num">1</span>
+        <span class="stat-label">component class, bundle already loaded</span>
+      </div>
+      <div class="stat stat-va">
+        <span class="stat-num">0</span>
+        <span class="stat-label">dependencies — it's all yours</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section id="previews" class="section">
+      <h2>The same card, live</h2>
+      <p class="section-sub">Each frame below is its own live page, loading only that framework. View source to see exactly what shipped.</p>
+
+      <div class="preview-grid">
+
+        <article class="preview-col col-tw">
+          <div class="preview-head">
+            <span class="dot"></span>
+            <h3>Tailwind CSS</h3>
+          </div>
+          <iframe src="previews/tailwind-card.html" title="Tailwind pricing card" loading="lazy"></iframe>
+          <pre class="code-block"><code>&lt;div class="bg-white rounded-xl shadow-lg p-6 w-72"&gt;
+  &lt;h3 class="text-xl font-bold text-slate-900"&gt;
+    Pricing plan
+  &lt;/h3&gt;
+  &lt;p class="mt-2 text-slate-500"&gt;
+    Everything you need for a weekend project.
+  &lt;/p&gt;
+  &lt;button class="mt-4 bg-sky-500 hover:bg-sky-600
+    text-white font-semibold px-4 py-2 rounded-lg"&gt;
+    Save
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+          <a class="source-link" href="previews/tailwind-card.html" target="_blank" rel="noopener">Open standalone →</a>
+        </article>
+
+        <article class="preview-col col-bs">
+          <div class="preview-head">
+            <span class="dot"></span>
+            <h3>Bootstrap</h3>
+          </div>
+          <iframe src="previews/bootstrap-card.html" title="Bootstrap pricing card" loading="lazy"></iframe>
+          <pre class="code-block"><code>&lt;div class="card border-0 shadow-lg p-4" style="width: 18rem"&gt;
+  &lt;h3 class="card-title fw-bold fs-4"&gt;
+    Pricing plan
+  &lt;/h3&gt;
+  &lt;p class="card-text text-secondary"&gt;
+    Everything you need for a weekend project.
+  &lt;/p&gt;
+  &lt;button class="btn btn-primary rounded-pill px-3"&gt;
+    Save
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+          <a class="source-link" href="previews/bootstrap-card.html" target="_blank" rel="noopener">Open standalone →</a>
+        </article>
+
+        <article class="preview-col col-va">
+          <div class="preview-head">
+            <span class="dot"></span>
+            <h3>Vanilla CSS</h3>
+          </div>
+          <iframe src="previews/vanilla-card.html" title="Vanilla CSS pricing card" loading="lazy"></iframe>
+          <pre class="code-block"><code>.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(15,23,42,.12);
+  padding: 24px;
+  width: 260px;
+}
+.card h3 { font-weight: 700; color: #0f172a; }
+.card p  { color: #64748b; }
+.card button {
+  background: #0ea5e9;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: 600;
+}</code></pre>
+          <a class="source-link" href="previews/vanilla-card.html" target="_blank" rel="noopener">Open standalone →</a>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="tradeoffs" class="section">
+      <h2>What each one trades off</h2>
+      <p class="section-sub">Nothing here is free. Every approach buys you something and costs you something else.</p>
+
+      <div class="tradeoff-grid">
+
+        <div class="tradeoff-col">
+          <h3 class="col-tw">Tailwind CSS</h3>
+          <ul class="pro-list">
+            <li><span class="mark good">✓</span><div><strong>Fast to write</strong><span>no file switching</span></div></li>
+            <li><span class="mark good">✓</span><div><strong>Consistent by default</strong><span>one spacing & colour scale</span></div></li>
+            <li><span class="mark good">✓</span><div><strong>Responsive in place</strong><span>md:, lg: right on the element</span></div></li>
+            <li><span class="mark good">✓</span><div><strong>Fits component code</strong><span>React, Vue, Svelte</span></div></li>
+          </ul>
+          <ul class="con-list">
+            <li><span class="mark bad">✗</span><div><strong>Long class lists</strong><span>extract a component once it repeats</span></div></li>
+            <li><span class="mark bad">✗</span><div><strong>A vocabulary to learn</strong><span>a day or two, then muscle memory</span></div></li>
+            <li><span class="mark bad">✗</span><div><strong>Markup looks noisy</strong><span>true — that's the trade</span></div></li>
+            <li><span class="mark bad">✗</span><div><strong>Overkill for tiny sites</strong><span>plain CSS is fine there</span></div></li>
+          </ul>
+        </div>
+
+        <div class="tradeoff-col">
+          <h3 class="col-bs">Bootstrap</h3>
+          <ul class="pro-list">
+            <li><span class="mark good">✓</span><div><strong>Ready-made components</strong><span>navbar, modal, card — done</span></div></li>
+            <li><span class="mark good">✓</span><div><strong>Huge ecosystem</strong><span>themes, templates, decades of answers</span></div></li>
+            <li><span class="mark good">✓</span><div><strong>Consistent out of the box</strong><span>one design language, no bikeshedding</span></div></li>
+            <li><span class="mark good">✓</span><div><strong>Low ramp-up</strong><span>most devs have touched it before</span></div></li>
+          </ul>
+          <ul class="con-list">
+            <li><span class="mark bad">✗</span><div><strong>Generic look</strong><span>sites read “Bootstrap-y” unless themed</span></div></li>
+            <li><span class="mark bad">✗</span><div><strong>Heavier bundle</strong><span>CSS + JS you may not use</span></div></li>
+            <li><span class="mark bad">✗</span><div><strong>Overriding fights</strong><span>beating specificity to make it yours</span></div></li>
+            <li><span class="mark bad">✗</span><div><strong>Component lock-in</strong><span>off-pattern designs fight the grain</span></div></li>
+          </ul>
+        </div>
+
+        <div class="tradeoff-col">
+          <h3 class="col-va">Vanilla CSS</h3>
+          <ul class="pro-list">
+            <li><span class="mark good">✓</span><div><strong>Zero dependencies</strong><span>nothing to install, nothing to update</span></div></li>
+            <li><span class="mark good">✓</span><div><strong>Full control</strong><span>no framework opinions to work around</span></div></li>
+            <li><span class="mark good">✓</span><div><strong>Smallest payload</strong><span>only what you write ships</span></div></li>
+            <li><span class="mark good">✓</span><div><strong>No abstraction</strong><span>it's just CSS, forever transferable</span></div></li>
+          </ul>
+          <ul class="con-list">
+            <li><span class="mark bad">✗</span><div><strong>Everything from scratch</strong><span>resets, grid, components — all manual</span></div></li>
+            <li><span class="mark bad">✗</span><div><strong>Naming is on you</strong><span>BEM or however you keep it sane</span></div></li>
+            <li><span class="mark bad">✗</span><div><strong>Consistency takes discipline</strong><span>no shared scale unless you build one</span></div></li>
+            <li><span class="mark bad">✗</span><div><strong>Slower to prototype</strong><span>no shortcuts for common patterns</span></div></li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="table" class="section">
+      <h2>Side by side</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>&nbsp;</th>
+              <th class="col-tw">Tailwind</th>
+              <th class="col-bs">Bootstrap</th>
+              <th class="col-va">Vanilla CSS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Bundle size</th>
+              <td>~10&nbsp;KB, purged</td>
+              <td>~25&nbsp;KB CSS + optional JS</td>
+              <td>0&nbsp;KB framework</td>
+            </tr>
+            <tr>
+              <th>Learning curve</th>
+              <td>A day or two of class names</td>
+              <td>Low — classes read like English</td>
+              <td>None — it's the CSS you know</td>
+            </tr>
+            <tr>
+              <th>Customization</th>
+              <td>High, via config file</td>
+              <td>Medium, via Sass variables</td>
+              <td>Unlimited</td>
+            </tr>
+            <tr>
+              <th>Components included</th>
+              <td>None — you compose them</td>
+              <td>Full set — navbar, modal, forms…</td>
+              <td>None</td>
+            </tr>
+            <tr>
+              <th>Best for</th>
+              <td>Custom design systems</td>
+              <td>Fast, conventional UI</td>
+              <td>Small sites, learning, tight control</td>
+            </tr>
+            <tr>
+              <th>Setup</th>
+              <td>Build step, or a CDN script tag</td>
+              <td>CDN link or npm install</td>
+              <td>No install</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="verdict" class="section verdict-section">
+      <p class="verdict-kicker">If you remember one thing</p>
+      <h2 class="verdict-line">
+        Bootstrap gives you finished components.<br>
+        Tailwind gives you building blocks.<br>
+        Vanilla gives you the whole box of parts.
+      </h2>
+      <p class="verdict-sub">All three end up as CSS in the browser. The difference is who assembles it, and how much you want to decide yourself.</p>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>Recreated from a “Tailwind CSS” lightning talk deck. Run this folder locally with <code>npm start</code> — see README.md.</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "css-framework-showdown",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tailwind CSS vs Bootstrap vs Vanilla CSS — the same pricing card, built three ways, with a live comparison page.",
+  "scripts": {
+    "start": "live-server --port=5500 --open=/index.html",
+    "serve": "live-server --port=5500 --open=/index.html"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}

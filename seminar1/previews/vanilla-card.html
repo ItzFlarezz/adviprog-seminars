@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Vanilla CSS — Pricing card</title>
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+
+  .card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+    padding: 24px;
+    width: 260px;
+  }
+
+  .card h3 {
+    margin: 0 0 8px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .card p {
+    margin: 0 0 16px;
+    color: #64748b;
+    line-height: 1.4;
+  }
+
+  .card button {
+    background: #0ea5e9;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .card button:hover {
+    background: #0284c7;
+  }
+</style>
+</head>
+<body>
+
+  <div class="card">
+    <h3>Pricing plan</h3>
+    <p>Everything you need for a weekend project.</p>
+    <button>Save</button>
+  </div>
+
+</body>
+</html>

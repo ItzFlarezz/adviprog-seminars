@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "ritwickdey.liveserver",
+    "bradlc.vscode-tailwindcss",
+    "esbenp.prettier-vscode",
+    "editorconfig.editorconfig",
+    "pranaygp.vscode-css-peek",
+    "formulahendry.auto-rename-tag",
+    "naumovs.color-highlight"
+  ]
+}
