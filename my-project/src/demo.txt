@@ -151,7 +151,9 @@ function ProductCard({
   description,
   price,
   onAddToCart,
-}: ProductCardProps) {
+}: 
+
+ProductCardProps) {
   return (
     <article className="w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-lg md:flex">
       <img
