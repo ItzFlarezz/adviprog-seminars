@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 	<head>
-		<title>WebSocket Client</title>
+		<title>WebSocket Demo</title>
 		<style>
 			body {
 				font-family: Arial, sans-serif;
@@ -39,46 +39,62 @@
 			const messages = document.getElementById("messages");
 			const messageInput = document.getElementById("messageInput");
 
+			// Ask the user for a name before connecting
+			const username = prompt("Enter your chat name:") || "Anonymous";
+
 			// Connect to the WebSocket server
 			const ws = new WebSocket("ws://localhost:8080");
 
-			// Connection opened
 			ws.onopen = () => {
-				status.textContent = "Connected to server";
+				status.textContent = `Connected as ${username}`;
 				status.style.color = "green";
+
+				// Optional: Announce to the room that someone joined
+				ws.send(`* ${username} has joined the chat *`);
 			};
 
-			// Listen for messages
 			ws.onmessage = (event) => {
 				const message = document.createElement("div");
 				message.className = "message";
 				message.textContent = event.data;
 				messages.appendChild(message);
-				messages.scrollTop = messages.scrollHeight;
+				messages.scrollTop = messages.scrollHeight; // Auto-scroll to bottom
 			};
 
-			// Handle errors
 			ws.onerror = (error) => {
-				status.textContent = "Error: " + error.message;
+				status.textContent = "Error connecting to server";
 				status.style.color = "red";
 			};
 
-			// Handle connection close
 			ws.onclose = () => {
 				status.textContent = "Disconnected from server";
 				status.style.color = "red";
 			};
 
-			// Function to send a message
 			function sendMessage() {
-				const message = messageInput.value.trim();
-				if (message) {
-					ws.send(message);
+				const text = messageInput.value.trim();
+				if (text) {
+					const fullMessage = `${username}: ${text}`;
+
+					// 1. Send the message to the server
+					ws.send(fullMessage);
+
+					// 2. Display the message on our OWN screen immediately
+					const messageDiv = document.createElement("div");
+					messageDiv.className = "message";
+					messageDiv.textContent = fullMessage;
+
+					// Optional: Make your own messages stand out (e.g., bold or colored)
+					messageDiv.style.fontWeight = "bold";
+
+					messages.appendChild(messageDiv);
+					messages.scrollTop = messages.scrollHeight;
+
+					// 3. Clear the input
 					messageInput.value = "";
 				}
 			}
 
-			// Send message on Enter key
 			messageInput.addEventListener("keypress", (e) => {
 				if (e.key === "Enter") {
 					sendMessage();
