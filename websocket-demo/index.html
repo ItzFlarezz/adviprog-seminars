@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
 	<head>
 		<title>WebSocket Demo</title>
 		<style>
@@ -22,7 +22,7 @@
 		</style>
 	</head>
 	<body>
-		<h1>WebSocket Client</h1>
+		<h1>WebSocket demo</h1>
 		<div id="status">Connecting to server...</div>
 		<div id="messages"></div>
 		<div>
@@ -40,7 +40,7 @@
 			const messageInput = document.getElementById("messageInput");
 
 			// Ask the user for a name before connecting
-			const username = prompt("Enter your chat name:") || "Anonymous";
+			const username = prompt("Enter your chat name:") || "Anon";
 
 			// Connect to the WebSocket server
 			const ws = new WebSocket("ws://localhost:8080");
