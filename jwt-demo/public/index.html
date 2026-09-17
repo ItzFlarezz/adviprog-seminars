@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>JWT Auth Demo</title>
+		<style>
+			body {
+				font-family: sans-serif;
+				padding: 20px;
+				max-width: 600px;
+			}
+			button {
+				padding: 10px;
+				margin-top: 10px;
+				cursor: pointer;
+			}
+			#output {
+				background: #f4f4f4;
+				padding: 10px;
+				margin-top: 20px;
+				white-space: pre-wrap;
+				font-family: monospace;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>JWT Authentication Demo</h2>
+
+		<div>
+			<input
+				type="text"
+				id="username"
+				placeholder="Enter a username"
+				value="TestUser"
+			/>
+			<button onclick="login()">1. Log In</button>
+		</div>
+
+		<div>
+			<button onclick="getProtectedData()">
+				2. Access Protected Route
+			</button>
+			<button onclick="logout()">3. Log Out</button>
+		</div>
+
+		<h3>Output:</h3>
+		<div id="output">Waiting for action...</div>
+
+		<script>
+			const outputDiv = document.getElementById("output");
+
+			function logOutput(message, data = "") {
+				const formattedData =
+					typeof data === "object"
+						? JSON.stringify(data, null, 2)
+						: data;
+				const logString = `${message}\n${formattedData}`;
+				outputDiv.innerText = logString;
+				console.log(message, data);
+			}
+
+			async function login() {
+				const username = document.getElementById("username").value;
+				logOutput("Attempting to log in...");
+
+				try {
+					const response = await fetch("/login", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({ username }),
+					});
+
+					const data = await response.json();
+
+					if (data.accessToken) {
+						// This is where the vulnerability lies!
+						// Storing in localStorage makes it accessible to JavaScript (and XSS attacks).
+						localStorage.setItem("jwtToken", data.accessToken);
+						logOutput(
+							"Login successful! Token saved to localStorage.",
+							data,
+						);
+					}
+				} catch (error) {
+					logOutput("Login failed:", error);
+				}
+			}
+
+			async function getProtectedData() {
+				logOutput("Fetching protected data...");
+
+				// Retrieve the token from localStorage
+				const token = localStorage.getItem("jwtToken");
+
+				try {
+					const response = await fetch("/protected", {
+						method: "GET",
+						headers: {
+							// Attach the token in the Authorization header
+							Authorization: `Bearer ${token}`,
+						},
+					});
+
+					const data = await response.json();
+
+					if (response.ok) {
+						logOutput("Success! Protected data received:", data);
+					} else {
+						logOutput(
+							`Failed! Server responded with status ${response.status}:`,
+							data,
+						);
+					}
+				} catch (error) {
+					logOutput("Request failed:", error);
+				}
+			}
+
+			function logout() {
+				// "Logging out" in a stateless client-side JWT setup just means deleting the token locally.
+				localStorage.removeItem("jwtToken");
+				logOutput("Logged out. Token removed from localStorage.");
+			}
+		</script>
+	</body>
+</html>
